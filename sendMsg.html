@@ -78,6 +78,8 @@
         .then(function(response){
             return response.json()
         })
+        const url = window.location.href.replace("sendMsg.html", "index.html");    // gets the current page and replaces to the required page
+        window.location.href = url;
     })
 </script>
 </html>

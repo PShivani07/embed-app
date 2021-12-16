@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="checkboxesSty.css" type="">
     <script type="text/javascript" src="data.js"></script>
+    <script type="text/javascript" src="getRoom.js"></script>
     <title>Spaces</title>
 </head>
 <body>
@@ -30,37 +31,12 @@
     </main>
 </body>
 <script>
+    // var space = document.getElementById("spaces")
+    // space.innerHTML = ''
 
-    fetch('https://webexapis.com/v1/rooms', {
-            method: 'GET',
-            headers:{
-                "Authorization": access_key,
-                "Content-Type": "application/json"
-            }
-    })
-    .then(function(response){
-        return response.json()
-    })
-    .then(function(data){
-        console.log(data)
-        var space = document.getElementById("spaces")
-        space.innerHTML = ''
+    var options = document.getElementById("options")
+    options.innerHTML = ''
 
-        // for(var i=0; i<data.items.length; i++) {
-        //     space.innerHTML += `<p> Room id: ${data.items[i].id} </p>
-        //     <p> Title of the page: ${data.items[i].title} </p>`
-        // }
-
-        var options = document.getElementById("options")
-        options.innerHTML = ''
-
-        for(var i=0; i<data.items.length; i++) {
-            var opt = document.createElement('option');
-            opt.innerHTML = data.items[i].title;
-            opt.value = data.items[i].title;
-            options.appendChild(opt);
-        }
-    })
-
+    getRoom(options, access_key)
 </script>
 </html>
