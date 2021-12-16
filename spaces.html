@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="checkboxesSty.css" type="">
+    <script type="text/javascript" src="data.js"></script>
+    <title>Spaces</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home Page</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <article>
+            <h1>Welcome to shareMedia</h1>
+            <p>Display all Spaces</p>
+
+            <select id="options">
+                <option>Choose a Member</option>
+            </select>
+            <div id="spaces"></div>
+        </article>
+    </main>
+</body>
+<script>
+
+    fetch('https://webexapis.com/v1/rooms', {
+            method: 'GET',
+            headers:{
+                "Authorization": access_key,
+                "Content-Type": "application/json"
+            }
+    })
+    .then(function(response){
+        return response.json()
+    })
+    .then(function(data){
+        console.log(data)
+        var space = document.getElementById("spaces")
+        space.innerHTML = ''
+
+        // for(var i=0; i<data.items.length; i++) {
+        //     space.innerHTML += `<p> Room id: ${data.items[i].id} </p>
+        //     <p> Title of the page: ${data.items[i].title} </p>`
+        // }
+
+        var options = document.getElementById("options")
+        options.innerHTML = ''
+
+        for(var i=0; i<data.items.length; i++) {
+            var opt = document.createElement('option');
+            opt.innerHTML = data.items[i].title;
+            opt.value = data.items[i].title;
+            options.appendChild(opt);
+        }
+    })
+
+</script>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Message To All</title>
+    <link rel="stylesheet" href="checkboxesSty.css" type="">
+    <script type="text/javascript" src="data.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home Page</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <article>
+            <h1>Welcome to shareMedia</h1>
+            <!-- <p>Select members to send a message</p>
+            <select id="options">
+                <option value="" selected>[ Select one ]</option>
+            </select> -->
+
+
+            <p>Select members using checkboxes</p>
+            <form>
+                <div class="multiselect">
+                  <div class="selectBox" onclick="showCheckboxes()">
+                    <select>
+                      <option>Select an option</option>
+                    </select>
+                    <div class="overSelect"></div>
+                  </div>
+                  <div id="checkboxes"></div>
+                </div>
+            </form>
+            
+
+
+            <p>Enter Message:</p>
+            <form id="msg" method="post">
+                <input type="text" id="message" placeholder="Message" />
+                <input type="submit" name="Submit" id="submit" />
+            </form>
+        </article>
+    </main>
+</body>
+<script>
+    // var option = document.getElementById("options")
+    // option.innerHTML = ''
+    
+    // fetch('https://webexapis.com/v1/rooms', {
+    //         method: 'GET',
+    //         headers:{
+    //             "Authorization": access_key,
+    //             "Content-Type": "application/json"
+    //         }
+    // })
+    // .then(function(response){
+    //     return response.json()
+    // })
+    // .then(function(data){
+    //     for(var i=0; i<data.items.length; i++) {
+    //         var opt = document.createElement('option');
+    //         opt.innerHTML = data.items[i].title;
+    //         opt.value = data.items[i].id;
+    //         option.appendChild(opt);
+    //     }
+    // })
+
+
+
+
+    
+    var expanded = false
+
+    function showCheckboxes() {
+        var checkbox = document.getElementById("checkboxes")
+        checkbox.innerHTML = ''
+        if (!expanded) {
+            checkbox.style.display = 'block';
+            expanded = true;
+        } else {
+            checkbox.style.display = 'none';
+            expanded = false;
+        }
+
+        fetch('https://webexapis.com/v1/rooms', {
+            method: 'GET',
+            headers:{
+                "Authorization": access_key,
+                "Content-Type": "application/json"
+            }
+        })
+        .then(function(response){
+            return response.json()
+        })
+        .then(function(data){
+            for(var i=0; i<data.items.length; i++) {
+                checkbox.innerHTML += '<label for=' + data.items[i].id + '><input type="checkbox" name="theCheckbox" id="' 
+                                        + data.items[i].id + '" />' + data.items[i].title + '</label>';
+            }
+        })
+    }
+
+    
+
+
+
+
+    // var msg = document.getElementById('msg')
+    // var media = {}
+
+    // msg.addEventListener('submit', function(e){
+    //     e.preventDefault()
+
+    //     media['roomId'] = option.value
+    //     media['text'] = document.getElementById("message").value
+        
+    //     fetch("https://webexapis.com/v1/messages", {
+    //         method: 'POST',
+    //         body:JSON.stringify( media ),
+    //         headers:{
+    //             "Authorization": access_key,
+    //             "Content-Type": "application/json"
+    //         }
+    //     })
+    //     .then(function(response){
+    //         return response.json()
+    //     })
+    // })
+
+
+    var msg = document.getElementById('msg')
+
+    msg.addEventListener('submit', function(e){
+        e.preventDefault()
+
+        var checkedvalue = '';
+        var arrChecks = document.getElementsByName('theCheckbox');
+
+        for(var i=0; i<arrChecks.length; i++) {
+            if(arrChecks[i].checked){
+                var media = {}
+                media['roomId'] = arrChecks[i].id
+                media['text'] = document.getElementById("message").value
+
+                fetch("https://webexapis.com/v1/messages", {
+                    method: 'POST',
+                    body:JSON.stringify( media ),
+                    headers:{
+                        "Authorization": access_key,
+                        "Content-Type": "application/json"
+                    }
+                })
+                .then(function(response){
+                    return response.json()
+                })
+            }
+        }
+        
+        
+    })
+
+
+</script>
+</html>

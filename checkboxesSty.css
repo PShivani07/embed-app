@@ -1,0 +1,60 @@
+header {
+    display: block;
+    position: fixed;
+    background-color: #dadada;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+}
+
+nav a:visited,
+nav a:link {
+    color: blue;
+    text-decoration: none;
+}
+
+h1 {
+    font-size: 3em;
+    margin-top: 1.5em;
+}
+
+nav > ul > li {
+    display: inline-block;
+    list-style: none;
+    margin: 0 5px 0 5px;
+}
+
+.multiselect {
+    width: 200px;
+}
+
+.selectBox {
+    position: relative;
+}
+
+.selectBox select {
+    width: 100%;
+    font-weight: bold;
+}
+
+.overSelect {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+#checkboxes {
+    display: none;
+    border: 1px #dadada solid;
+}
+
+#checkboxes label {
+    display: block;
+}
+
+#checkboxes label:hover {
+    background-color: #1e90ff;
+}

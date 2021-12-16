@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="checkboxesSty.css" type="">
+    <title>Send Message</title>
+    <script src="./data.js" type="text/javascript"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home Page</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <article>
+            <h1>Welcome to shareMedia</h1>
+            <p>Select group/member to send a message</p>
+            <select id="options">
+                <option value="" selected>[ Select one ]</option>
+            </select>
+            
+            <p>Enter Message:</p>
+            <form id="msg" method="post">
+                <input type="text" id="message" placeholder="Message" />
+                <input type="submit" name="Submit" id="submit" />
+            </form>
+        </article>
+    </main>
+</body>
+<script>
+    var option = document.getElementById("options")
+    option.innerHTML = ''
+    
+    fetch('https://webexapis.com/v1/rooms', {
+            method: 'GET',
+            headers:{
+                "Authorization": access_key,
+                "Content-Type": "application/json"
+            }
+    })
+    .then(function(response){
+        return response.json()
+    })
+    .then(function(data){
+        console.log(data)
+
+        for(var i=0; i<data.items.length; i++) {
+            var opt = document.createElement('option');
+            opt.innerHTML = data.items[i].title;
+            opt.value = data.items[i].id;
+            option.appendChild(opt);
+        }
+    })
+
+    var msg = document.getElementById('msg')
+    var media = {}
+
+    msg.addEventListener('submit', function(e){
+        e.preventDefault()
+
+        media['roomId'] = option.value
+        media['text'] = document.getElementById("message").value
+        
+        fetch("https://webexapis.com/v1/messages", {
+            method: 'POST',
+            body:JSON.stringify( media ),
+            headers:{
+                "Authorization": access_key,
+                "Content-Type": "application/json"
+            }
+        })
+        .then(function(response){
+            return response.json()
+        })
+    })
+</script>
+</html>

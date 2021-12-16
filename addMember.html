@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="checkboxesSty.css" type="">
+    <script type="text/javascript" src="data.js"></script>
+    <title>Add Members</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home Page</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <article>
+            <h1>Welcome to shareMedia</h1>
+            <p>Select a group</p>
+            <select id="roomId">
+                <option value ="" selected = "selected">[ Select one ]</option>
+            </select>
+
+            <p>Enter member's Email ID to add</p>
+            <form id="addUser" method="post">
+                <input type="text" id="email" placeholder="EmailID" />
+                <input type="submit" name="Submit" id="submit" />
+            </form>
+        </article>
+    </main>
+    
+</body>
+<script>
+    var room = document.getElementById("roomId")
+    room.innerHTML = ''
+    
+    fetch('https://webexapis.com/v1/rooms', {
+            method: 'GET',
+            headers:{
+                "Authorization": access_key,
+                "Content-Type": "application/json"
+            }
+    })
+    .then(function(response){
+        return response.json()
+    })
+    .then(function(data){
+        console.log(data)
+
+        for(var i=0; i<data.items.length; i++) {
+            var opt = document.createElement('option');
+            opt.innerHTML = data.items[i].title;
+            opt.value = data.items[i].id;
+            room.appendChild(opt);
+        }
+    })
+    
+    var add = document.getElementById('addUser')
+    var user = {}
+
+    add.addEventListener('submit', function(e){
+        e.preventDefault()
+
+        user['roomId'] = room.value
+        user['personEmail'] = document.getElementById('email').value
+        user['isModerator'] = false
+        
+        fetch("https://webexapis.com/v1/memberships", {
+            method: 'POST',
+            body:JSON.stringify( user ),
+            headers:{
+                "Authorization": access_key,
+                "Content-Type": "application/json"
+            }
+        })
+        .then(function(response){
+            return response.json()
+        })
+    })
+
+</script>
+</html>
