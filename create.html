@@ -7,7 +7,21 @@
     <link rel="stylesheet" href="checkboxesSty.css" type="">
     <script type="text/javascript" src="data.js"></script>
     <script type="text/javascript" src="postRoom.js"></script>
-    <title>Create Space</title>
+    <title>Create Space | shareMedia</title>
+    <style>
+        input[type='text'] {
+            padding: 10px;
+            border: solid 1px #999;
+            border-radius: 2px;
+            width: 50%;
+        }
+
+        input[type='submit'] {
+            border: solid 1px #999;
+            border-radius: 3px;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -19,15 +33,28 @@
     </header>
 
     <main>
+        <aside><img src="images/cursor-logo.png" alt="Bethany's pie shop"></aside>
         <article>
-            <h1>Welcome to shareMedia</h1>
-            <p>Create space</p>
+            <h1>Create a Space</h1>
+            <p>Enter Space Title</p>
             <form id="form" method="post">
                 <input type="text" id="title" placeholder="Title" />
                 <input type="submit" name="Submit" id="submit" />
             </form>
         </article>
     </main>
+
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="spaces.html">All Spaces</a></li>
+                <li><a href="create.html">Create a Space</a></li>
+                <li><a href="addMember.html">Add member</a></li>
+                <li><a href="sendMsg.html">Send Message</a></li>
+                <li><a href="sendMsgAll.html">Send Message to All</a></li>
+            </ul>
+        </nav>
+    </footer>
 </body>
 <script>
     var form = document.getElementById("form")

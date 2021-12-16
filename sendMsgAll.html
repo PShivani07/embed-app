@@ -4,9 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Send Message To All</title>
+    <title>Send Message To All | shareMedia</title>
     <link rel="stylesheet" href="checkboxesSty.css" type="">
     <script type="text/javascript" src="data.js"></script>
+    <style>
+        input[type='text'] {
+            padding: 10px;
+            border: solid 1px #999;
+            border-radius: 2px;
+            width: 48%;
+        }
+
+        input[type='submit'] {
+            border: solid 1px #999;
+            border-radius: 3px;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -18,15 +32,16 @@
     </header>
 
     <main>
+        <aside><img src="images/cursor-logo.png" alt="Bethany's pie shop"></aside>
         <article>
-            <h1>Welcome to shareMedia</h1>
+            <h1>Share Message to All</h1>
             <!-- <p>Select members to send a message</p>
             <select id="options">
                 <option value="" selected>[ Select one ]</option>
             </select> -->
 
 
-            <p>Select members using checkboxes</p>
+            <p>Select members to share message</p>
             <form>
                 <div class="multiselect">
                   <div class="selectBox" onclick="showCheckboxes()">
@@ -48,6 +63,18 @@
             </form>
         </article>
     </main>
+
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="spaces.html">All Spaces</a></li>
+                <li><a href="create.html">Create a Space</a></li>
+                <li><a href="addMember.html">Add member</a></li>
+                <li><a href="sendMsg.html">Send Message</a></li>
+                <li><a href="sendMsgAll.html">Send Message to All</a></li>
+            </ul>
+        </nav>
+    </footer>
 </body>
 <script>
     // var option = document.getElementById("options")

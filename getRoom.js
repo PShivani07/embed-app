@@ -22,4 +22,5 @@ function getRoom(options, access_key) {
             options.appendChild(opt);
         }
     })
+    return options.value
 }

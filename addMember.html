@@ -6,7 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="checkboxesSty.css" type="">
     <script type="text/javascript" src="data.js"></script>
-    <title>Add Members</title>
+    <title>Add Members | shareMedia</title>
+    <style>
+        .select-group {
+            margin-bottom: 20px;
+        }
+        .select-group input,
+        .select-group textarea,
+        .select-group select {
+            padding: 10px;
+            border: solid 1px #999;
+            border-radius: 2px;
+            width: 50%;
+        }
+        input[type='text'] {
+            padding: 10px;
+            border: solid 1px #999;
+            border-radius: 2px;
+            width: 48%;
+        }
+
+        input[type='submit'] {
+            border: solid 1px #999;
+            border-radius: 3px;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -18,12 +43,15 @@
     </header>
 
     <main>
+        <aside><img src="images/cursor-logo.png" alt="Bethany's pie shop"></aside>
         <article>
-            <h1>Welcome to shareMedia</h1>
-            <p>Select a group</p>
-            <select id="roomId">
-                <option value ="" selected = "selected">[ Select one ]</option>
-            </select>
+            <h1>Add a member to a Group</h1>
+            <p>Select group</p>
+            <div class="select-group">
+                <select id="roomId">
+                    <option value ="" selected = "selected">Choose a Group</option>
+                </select>
+            </div>
 
             <p>Enter member's Email ID to add</p>
             <form id="addUser" method="post">
@@ -32,11 +60,23 @@
             </form>
         </article>
     </main>
+
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="spaces.html">All Spaces</a></li>
+                <li><a href="create.html">Create a Space</a></li>
+                <li><a href="addMember.html">Add member</a></li>
+                <li><a href="sendMsg.html">Send Message</a></li>
+                <li><a href="sendMsgAll.html">Send Message to All</a></li>
+            </ul>
+        </nav>
+    </footer>
     
 </body>
 <script>
     var room = document.getElementById("roomId")
-    room.innerHTML = ''
+    // room.innerHTML = ''
     
     fetch('https://webexapis.com/v1/rooms', {
             method: 'GET',

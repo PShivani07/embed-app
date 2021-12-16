@@ -7,7 +7,20 @@
     <link rel="stylesheet" href="checkboxesSty.css" type="">
     <script type="text/javascript" src="data.js"></script>
     <script type="text/javascript" src="getRoom.js"></script>
-    <title>Spaces</title>
+    <title>Spaces | shareMedia</title>
+    <style>
+        .select-group {
+            margin-bottom: 20px;
+        }
+        .select-group input,
+        .select-group textarea,
+        .select-group select {
+            padding: 10px;
+            border: solid 1px #999;
+            border-radius: 2px;
+            width: 50%;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -19,24 +32,41 @@
     </header>
 
     <main>
+        <aside><img src="images/cursor-logo.png" alt="Bethany's pie shop"></aside>
         <article>
-            <h1>Welcome to shareMedia</h1>
-            <p>Display all Spaces</p>
+            <h1>Display All Spaces</h1>
+            <p>Available Spaces</p>
 
-            <select id="options">
-                <option>Choose a Member</option>
-            </select>
-            <div id="spaces"></div>
+            <div class="select-group">
+                <select id="options">
+                    <option value="" selected>Choose a Space</option>
+                </select>
+            </div>
+            <!-- <div id="spaces"></div> -->
         </article>
     </main>
+
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="spaces.html">All Spaces</a></li>
+                <li><a href="create.html">Create a Space</a></li>
+                <li><a href="addMember.html">Add member</a></li>
+                <li><a href="sendMsg.html">Send Message</a></li>
+                <li><a href="sendMsgAll.html">Send Message to All</a></li>
+            </ul>
+        </nav>
+    </footer>
 </body>
 <script>
     // var space = document.getElementById("spaces")
     // space.innerHTML = ''
 
     var options = document.getElementById("options")
-    options.innerHTML = ''
+    // options.innerHTML = ''
 
-    getRoom(options, access_key)
+    // var option = ''
+    getRoom(options, access_key).then(response => option = response)
+    // space.innerHTML = `<p> Title of the page: ${option.value} </p>`
 </script>
 </html>
